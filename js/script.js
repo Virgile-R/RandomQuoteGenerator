@@ -6,7 +6,7 @@ project 1 - A Random Quote Generator
 // For assistance: 
   // Check the "Project Resources" section of the project instructions
   // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
-//getRandomRGBValue();
+
   /***
  * generate a random RGB Value
  * 
@@ -60,7 +60,7 @@ function getRandomQuote() {
 /***
  * `printQuote` function
  * returns an HTML string containing a quote object. checks if the quote object has citation, year and tags propriety.
- * Changes the background color of the quote block.
+ * Changes the background color of the HTML body.
 ***/
 function printQuote() {
   let randomQuote = getRandomQuote();
