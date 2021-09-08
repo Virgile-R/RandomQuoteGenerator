@@ -13,23 +13,27 @@ project 1 - A Random Quote Generator
  ***/
  const getRandomRGBValue = () => Math.floor(Math.random() * 256);
 
-/*** 
- * `quotes` array 
-***/
 
 
-//changeElementBackgroundColor()
+
 /***
  * Takes a string representing an element as an argument, returns a new random background color for this element when called.
  * example use : changeElementBackgroundColor('body')
  ***/
 
 function changeElementBackgroundColor(element) {
-  const randomRgbValue = `rgb(${getRandomRGBValue()}, ${getRandomRGBValue()}, ${getRandomRGBValue()} )`;
-  const newColorElement = document.querySelector(element);
-  return newColorElement.style.backgroundColor = randomRgbValue;
-
+  if (!element){
+    throw 'Please provide a valid html element.'
+  } else {
+    const randomRgbValue = `rgb(${getRandomRGBValue()}, ${getRandomRGBValue()}, ${getRandomRGBValue()} )`;
+    const newColorElement = document.querySelector(element);
+    return newColorElement.style.backgroundColor = randomRgbValue;
 }
+}
+
+/*** 
+ * `quotes` array 
+***/
 
 const quotes = [
   {quote: 'He wormed his way through the thicket towards the forest.', source: 'William Golding', citation: 'Lord of the Flies', year: '1954', tags: ["literature", "english", "nobel prize"]},
@@ -39,7 +43,7 @@ const quotes = [
   {quote: 'Lord  Felmet was one of Nature\'s gloater. He was good at it.', source: 'Terry Prachett', citation: 'Wyrd Sisters', year: '1980', tags : ["literature", "english", "fantasy"]}
 ];
 
-//console.log(quotes)
+
 /***
  * `getRandomQuote` function
  * returns a JavaScript object with the quote, source, citation, year and tags proprieties.
@@ -51,7 +55,7 @@ function getRandomQuote() {
   return quotes[randomQuoteIndex] 
 
 }
-//getRandomQuote();
+
 
 /***
  * `printQuote` function
