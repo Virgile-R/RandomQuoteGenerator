@@ -6,10 +6,30 @@ project 1 - A Random Quote Generator
 // For assistance: 
   // Check the "Project Resources" section of the project instructions
   // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
+/***
+ * generate a random RGB Value
+ * 
+ ***/
+ const getRandomRGBValue = () => Math.floor(Math.random() * 256);
 
 /*** 
  * `quotes` array 
 ***/
+//getRandomRGBValue();
+
+//changeElementBackgroundColor()
+/***
+ * Takes a string representing an element as an argument, returns a new random background color for this element when called.
+ * example use : changeElementBackgroundColor('body')
+ ***/
+
+function changeElementBackgroundColor(element) {
+  const randomRgbValue = `rgb(${getRandomRGBValue()}, ${getRandomRGBValue()}, ${getRandomRGBValue()} )`;
+  const newColorElement = document.querySelector(element);
+  return newColorElement.style.backgroundColor = randomRgbValue;
+
+}
+
 const quotes = [
   {quote: 'He wormed his way through the thicket towards the forest.', source: 'William Golding', citation: 'Lord of the Flies', year: '1954', tags: ["literature", "english", "nobel prize"]},
   {quote: 'La conscience littéraire verbale (et d\'une maniète plus large, idéologiquement verbale) des auteurs était complexe.', source: 'Mikhaïl Bakhtine', citation: 'Esthétique et théorie du roman', year: '1987', tags : ["study", "russian", "literary analysis"]},
@@ -47,15 +67,22 @@ function printQuote() {
   if (randomQuote.year) {
     html += `<span class="year"> ${randomQuote.year} </span>`
   }
+  if (randomQuote.tags){
+    html += `<br>tags: `
+    for (let i = 0; i < randomQuote.tags.length; i++) {
+      
+      html +=`<span class="tags"> <i>${randomQuote.tags[i]}</i> </span> <strong>|</strong> `
+
+    }
+
+  }
+  changeElementBackgroundColor('body')
   html += "</p>"
-
+  
   return document.getElementById('quote-box').innerHTML = html
-
-
-
 }
 
-
+setInterval(printQuote, 5000)
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
