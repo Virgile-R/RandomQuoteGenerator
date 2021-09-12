@@ -12,7 +12,7 @@ project 1 - A Random Quote Generator
  * 
  ***/
  const getRandomRGBValue = () => Math.floor(Math.random() * 256);
-
+ let previousQuoteIndex = -1 // stores the index value of the last quote to avoid repeat quote.
 
 
 
@@ -50,8 +50,13 @@ const quotes = [
  * quote, source, citation and year are strings, tags is an array.
 ***/
 function getRandomQuote() {
-  const randomQuoteIndex = Math.floor(Math.random() * quotes.length)
-  //console.log(quotes[randomQuoteIndex])
+  let randomQuoteIndex = Math.floor(Math.random() * quotes.length)
+  while (randomQuoteIndex === previousQuoteIndex ){
+    randomQuoteIndex = Math.floor(Math.random() * quotes.length)
+
+
+  }
+  previousQuoteIndex = randomQuoteIndex
   return quotes[randomQuoteIndex] 
 
 }
@@ -59,7 +64,7 @@ function getRandomQuote() {
 
 /***
  * `printQuote` function
- * returns an HTML string containing a quote object. checks if the quote object has citation, year and tags propriety.
+ * inserts an HTML string containing a quote object. checks if the quote object has citation, year and tags propriety.
  * Changes the background color of the quote block.
 ***/
 function printQuote() {
@@ -87,6 +92,7 @@ function printQuote() {
   return document.getElementById('quote-box').innerHTML = html
 }
 
+printQuote()
 setInterval(printQuote, 5000)
 /***
  * click event listener for the print quote button
