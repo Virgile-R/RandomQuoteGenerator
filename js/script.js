@@ -17,18 +17,16 @@ project 1 - A Random Quote Generator
 
 
 /***
- * Takes a string representing an element as an argument, returns a new random background color for this element when called.
+ * Takes a string representing a css selector as an argument, returns a new random background color for this element when called.
  * example use : changeElementBackgroundColor('body')
  ***/
 
 function changeElementBackgroundColor(element) {
-  if (!element){
-    throw 'Please provide a valid html element.'
-  } else {
-    const randomRgbValue = `rgb(${getRandomRGBValue()}, ${getRandomRGBValue()}, ${getRandomRGBValue()} )`;
-    const newColorElement = document.querySelector(element);
-    return newColorElement.style.backgroundColor = randomRgbValue;
-}
+ 
+  const randomRgbValue = `rgb(${getRandomRGBValue()}, ${getRandomRGBValue()}, ${getRandomRGBValue()} )`;
+  const newColorElement = document.querySelector(element);
+  return newColorElement.style.backgroundColor = randomRgbValue;
+
 }
 
 /*** 
@@ -36,11 +34,39 @@ function changeElementBackgroundColor(element) {
 ***/
 
 const quotes = [
-  {quote: 'He wormed his way through the thicket towards the forest.', source: 'William Golding', citation: 'Lord of the Flies', year: '1954', tags: ["literature", "english", "nobel prize"]},
-  {quote: 'La conscience littéraire verbale (et d\'une maniète plus large, idéologiquement verbale) des auteurs était complexe.', source: 'Mikhaïl Bakhtine', citation: 'Esthétique et théorie du roman', year: '1987', tags : ["study", "russian", "literary analysis"]},
-  {quote: 'Le concept de corporatisme est souvent connoté négativement, en France ou ailleurs[...]', source: 'Yohann Aucante' , citation: 'Les démocraties scandinaves', year: '2013', tags : ["study", "political science", "scandinavia"]},
-  {quote: 'Certains de nos clercs sont plongés dans l\'erreur et pensent bien agir et contribuer à l\'amélioration de la foi en critiquant le roi[...]', source: 'Anonyme', citation: 'Discours contre les évèques', year: 'vers 1280', tags : ["historical", "scandinavia", "political science"]},
-  {quote: 'Lord  Felmet was one of Nature\'s gloater. He was good at it.', source: 'Terry Prachett', citation: 'Wyrd Sisters', year: '1980', tags : ["literature", "english", "fantasy"]}
+  {
+    quote: 'He wormed his way through the thicket towards the forest.', 
+    source: 'William Golding', citation: 'Lord of the Flies', 
+    year: '1954', tags: ["literature", "english", "nobel prize"]
+  },
+  {
+    quote: 'La conscience littéraire verbale (et d\'une maniète plus large, idéologiquement verbale) des auteurs était complexe.', 
+    source: 'Mikhaïl Bakhtine', 
+    citation: 'Esthétique et théorie du roman', 
+    year: '1987', 
+    tags : ["study", "russian", "literary analysis"]
+  },
+  {
+    quote: 'Le concept de corporatisme est souvent connoté négativement, en France ou ailleurs[...]', 
+    source: 'Yohann Aucante' , 
+    citation: 'Les démocraties scandinaves', 
+    year: '2013', 
+    tags : ["study", "political science", "scandinavia"]
+},
+  {
+    quote: 'Certains de nos clercs sont plongés dans l\'erreur et pensent bien agir et contribuer à l\'amélioration de la foi en critiquant le roi[...]',
+    source: 'Anonyme',
+    citation: 'Discours contre les évèques',
+    year: 'vers 1280',
+    tags : ["historical", "scandinavia", "political science"]
+  },
+  {
+    quote: 'Lord  Felmet was one of Nature\'s gloater. He was good at it.', 
+    source: 'Terry Prachett', 
+    citation: 'Wyrd Sisters', 
+    year: '1980', 
+    tags : ["literature", "english", "fantasy"]
+  }
 ];
 
 
@@ -78,22 +104,25 @@ function printQuote() {
     html += `<span class="year"> ${randomQuote.year} </span>`
   }
   if (randomQuote.tags){
-    html += `<br>tags: `
+    html += `<br><span class="tag-container">tags: `
     for (let i = 0; i < randomQuote.tags.length; i++) {
       
-      html +=`<span class="tags"> <i>${randomQuote.tags[i]}</i> </span> <strong>|</strong> `
+      html +=`<span class="tags">${randomQuote.tags[i]}</span>`
 
     }
-
+    html +="</span>"
   }
   changeElementBackgroundColor('body')
   html += "</p>"
   
+  clearInterval(timer)
+  timer = setInterval(printQuote, 5000)
   document.getElementById('quote-box').innerHTML = html
 }
 
+let timer = setInterval(printQuote, 5000)
 printQuote()
-setInterval(printQuote, 5000)
+
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
